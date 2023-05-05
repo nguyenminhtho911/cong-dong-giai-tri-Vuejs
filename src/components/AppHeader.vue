@@ -2,7 +2,7 @@
   <header>
     <div class="ass1-header">
       <div class="container">
-        <router-link to="/" class="ass1-logo">Meme</router-link>
+        <router-link to="/" class="ass1-logo">Meme ZendVn</router-link>
 
         <app-navigation />
 
