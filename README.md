@@ -12,7 +12,7 @@ npm run build
 ```
 
 ## Link demo:
-https://cong-dong-giai-tri.netlify.app
+<a href="https://cong-dong-giai-tri.netlify.app" target="_blank">https://cong-dong-giai-tri.netlify.app</a>
 
 ### Browser settings allow API calls (turn off SSL)
 
