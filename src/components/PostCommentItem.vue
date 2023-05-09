@@ -1,10 +1,10 @@
 <template>
   <div class="ass1-comments__section" v-if="comment">
-    <router-link to="" class="ass1-comments__avatar ass1-avatar">
+    <router-link v-bind:to="getUserLink" class="ass1-comments__avatar ass1-avatar">
       <img v-bind:src="getAvatar" alt=""
     /></router-link>
     <div class="ass1-comments__content">
-      <router-link to="" class="ass1-comments__name"
+      <router-link v-bind:to="getUserLink" class="ass1-comments__name"
         >{{ comment.fullname }}
       </router-link>
       <span class="ass1-comments__passed"> {{ formatTimeCmt }} </span>
@@ -25,6 +25,10 @@ export default {
     getAvatar() {
       if (this.comment && this.comment.profilepicture) return this.comment.profilepicture;
       return "/dist/images/avatar-02.png";
+    },
+
+    getUserLink() {
+      return { name: "user-page", params: { id: this.comment.USERID || 1 } };
     },
 
     formatTimeCmt() {

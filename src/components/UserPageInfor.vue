@@ -70,7 +70,7 @@ export default {
     getAvatar() {
       if (this.userInfor && this.userInfor.profilepicture)
         return this.userInfor.profilepicture;
-      return "dist/images/default-avatar.png";
+      return "/dist/images/default-avatar.png";
     },
     isCurrentUser() {
       if (this.userInfor && this.currentUser) {
