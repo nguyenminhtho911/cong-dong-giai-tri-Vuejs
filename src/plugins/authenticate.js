@@ -29,4 +29,18 @@ const ifAuthenticated = (to, from, next) => {
   }
 };
 
-export { ifNotAuthenticated, ifAuthenticated };
+const ifAuthenticatedIsAdmin = (to, from, next) => {
+  // 2. Router chỉ cho phép vào khi đã đăng nhập và là admin
+  if (store.getters.isLogin === true && store.getters.isAdmin === true) {
+    next(); // cho phép vào
+  } else {
+    next({
+      name: "home-page",
+      query: {
+        redirect: to.name
+      }
+    });
+  }
+};
+
+export { ifNotAuthenticated, ifAuthenticated, ifAuthenticatedIsAdmin };

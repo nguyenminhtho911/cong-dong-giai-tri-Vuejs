@@ -12,8 +12,9 @@ import UserProfile from './pages/UserProfile'
 import Search from './pages/Search'
 import DashboardPosts from './pages/DashboardPosts'
 import PostEdit from './pages/PostEdit'
+import AdminManage from './pages/AdminManage'
 
-import { ifNotAuthenticated, ifAuthenticated } from './plugins/authenticate'
+import { ifNotAuthenticated, ifAuthenticated, ifAuthenticatedIsAdmin } from './plugins/authenticate'
 
 Vue.use(VueRouter) 
 
@@ -80,6 +81,12 @@ const routes = [
         component: PostEdit,
         beforeEnter: ifAuthenticated,
     },
+    {
+        path: '/admin',
+        name: 'admin-manage',
+        component: AdminManage, 
+        beforeEnter: ifAuthenticatedIsAdmin,
+    }
 ]
 
 const scrollBehavior = function (to, from, savedPosition) {

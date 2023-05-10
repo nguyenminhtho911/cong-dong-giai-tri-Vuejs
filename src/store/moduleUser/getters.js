@@ -19,5 +19,17 @@ export default {
       return state.posts[userCurrentId];
     }
     return null;
+  },
+  isAdmin: state => {
+    if (
+      state.currentUser && state.currentUser.permission == "admin" || 
+      parseJwt(state[CONFIG_ACCESS_TOKEN]).email == 'admin@gmail.com'
+    ) {
+      return true;
+    }
+    return false
+  },
+  getListMembers : state => {
+    return state.listMembers
   }
 };

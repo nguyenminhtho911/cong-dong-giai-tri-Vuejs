@@ -265,4 +265,78 @@ export default {
       }
     }
   },
+  async getListMemberHasPaging ({ commit }, { pagesize = 4, currPage = 1 }) {
+    commit("SET_LOADING", true);
+    try {
+      var config = {
+        params: {
+          pagesize,
+          currPage
+        },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem(CONFIG_ACCESS_TOKEN)
+        }
+      };
+      var result = await axiosInstance("/member/getListPaging.php", config)
+      commit("SET_LOADING", false);
+
+      if(result.data.status === 200) {
+        commit("SET_LIST_MEMBERS", result.data.body.users);
+        return {
+          ok: true,
+          data: result.data.body
+        }
+      } else {
+        console.log(err, result.data.error);
+      }
+      
+    } catch (error) {
+      commit("SET_LOADING", false);
+      console.log("error", error);
+    }
+  },
+
+  async toggleMemberStatus({ commit }, member) {
+    commit("SET_LOADING", true);
+    try {
+      let data = {
+        userid : member.USERID
+      }
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem(CONFIG_ACCESS_TOKEN)
+        }
+      }
+      var result = await axiosInstance.post("/member/activeDeactive.php", data, config);
+      commit("SET_LOADING", false);
+
+      if(result.data.status === 200) {
+        let newStatus = member.status == 1 ? 0 : 1;
+        let memberUpdated = {
+          ...member,
+          status: newStatus
+        }
+        commit("SET_MEMBER_UPDATE", memberUpdated);
+
+        return {
+          ok: true,
+          message: result.data.message
+        }
+      }
+
+      return {
+        ok: false,
+        error: result.data.error 
+      }
+      
+    } catch (error) {
+      commit("SET_LOADING", false);
+      return {
+        ok: false,
+        error: error.message
+      }
+    }
+  }
 }

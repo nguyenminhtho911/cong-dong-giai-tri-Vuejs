@@ -39,5 +39,14 @@ export default {
     if (index !== -1) {
       state.posts[userCurrentId].splice(index, 1, updatePost);
     }
+  },
+  SET_LIST_MEMBERS(state, members){
+    state.listMembers = members;
+  },
+  SET_MEMBER_UPDATE(state, memberUpdated) {
+    let index = state.listMembers.findIndex(member => member.USERID == memberUpdated.USERID);
+    if(index != 1) {
+      state.listMembers.splice(index, 1, memberUpdated)
+    }
   }
 };

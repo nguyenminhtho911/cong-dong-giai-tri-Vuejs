@@ -37,6 +37,12 @@
               class="ass1-head-user__btn-follow ass1-btn"
               >Quản lý bài viết</router-link
             >
+            <router-link
+              v-if="isAdmin"
+              v-bind:to="{ name: 'admin-manage' }"
+              class="ass1-head-user__btn-follow ass1-btn"
+              >Quản lý thành viên</router-link
+            >
           </template>
         </div>
         <div class="ass1-head-user__info-statistic">
@@ -66,7 +72,7 @@ export default {
     countPost: { type: Number, default: 0 },
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser", "isAdmin"]),
     getAvatar() {
       if (this.userInfor && this.userInfor.profilepicture)
         return this.userInfor.profilepicture;
